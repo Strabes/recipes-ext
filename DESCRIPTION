@@ -1,0 +1,20 @@
+Package: recipes.ext
+Title: Extensions to the R recipes Package
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Greg",
+           family = "Strabel",
+           role = c("aut", "cre"),
+           email = "gregory.strabel@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Extensions to the R recipes package.
+License: file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.0
+Imports: 
+    purrr,
+    recipes,
+    stats,
+    tibble
