@@ -1,3 +1,12 @@
+#' Top code numeric features based on percentile
+#'
+#' `step_top_code_perc` creates a *specification* of a recipe
+#'  step that will top code numeric data using a percentile learned
+#'  on a training set.
+#'
+#' @param prob A float providing the percentile to top code at
+#'
+#' @export
 step_top_code_perc <- function(
   recipe,
   ...,
@@ -9,9 +18,6 @@ step_top_code_perc <- function(
   id = recipes::rand_id("top_code_perc")
 ) {
 
-  ## The variable selectors are not immediately evaluated by using
-  ##  the `quos()` function in `rlang`. `ellipse_check()` captures
-  ##  the values and also checks to make sure that they are not empty.
   terms <- recipes::ellipse_check(...)
 
   recipes::add_step(
@@ -53,9 +59,6 @@ prep.step_top_code_perc <- function(x, training, info = NULL, ...) {
 
   ref_val <- purrr::map(training[, col_names],  stats::quantile, probs = x$prob)
 
-  ## Use the constructor function to return the updated object.
-  ## Note that `trained` is now set to TRUE
-
   step_top_code_perc_new(
     terms = x$terms,
     trained = TRUE,
@@ -70,8 +73,7 @@ prep.step_top_code_perc <- function(x, training, info = NULL, ...) {
 top_code <- function(x, val){ifelse(x>val,val,x)}
 
 bake.step_top_code_perc <- function(object, new_data, ...) {
-  ## For illustration (and not speed), we will loop through the affected variables
-  ## and do the computations
+
   vars <- names(object$ref_val)
 
   new_data[, vars] <-
