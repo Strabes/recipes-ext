@@ -1,5 +1,5 @@
-Package: recipes.ext
-Title: Extensions to the R recipes Package
+Package: tidymodels.ext
+Title: Extensions to R's tidymodels
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Greg",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "gregory.strabel@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Extensions to the R recipes package.
+Description: Extensions to the R's tidymodels.
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true

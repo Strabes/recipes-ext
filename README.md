@@ -1,2 +1,2 @@
-# recipes-ext
-Extensions to the R recipes package
+# tidymodels.ext
+Extensions to the `R`'s `tidymodels` package
