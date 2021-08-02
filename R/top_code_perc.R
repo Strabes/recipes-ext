@@ -4,7 +4,10 @@
 #'  step that will top code numeric data using a percentile learned
 #'  on a training set.
 #'
-#' @param prob A float providing the percentile to top code at
+#' @param prob A float providing the percentile at which to top code
+#' @param ref_val A float, learned from the training data,
+#'  representing the `prob` percentile of the predictor.
+#' @inheritParams recipes::step_center
 #'
 #' @export
 step_top_code_perc <- function(
@@ -48,7 +51,8 @@ step_top_code_perc_new <-
     )
   }
 
-
+#' @importFrom recipes prep
+#' @export
 prep.step_top_code_perc <- function(x, training, info = NULL, ...) {
   col_names <- recipes::terms_select(terms = x$terms, info = info)
 
@@ -72,6 +76,8 @@ prep.step_top_code_perc <- function(x, training, info = NULL, ...) {
 
 top_code <- function(x, val){ifelse(x>val,val,x)}
 
+#' @importFrom recipes bake
+#' @export
 bake.step_top_code_perc <- function(object, new_data, ...) {
 
   vars <- names(object$ref_val)

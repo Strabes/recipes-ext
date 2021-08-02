@@ -1,0 +1,50 @@
+---
+title: "top-bottom-code"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{top-bottom-code}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(recipes)
+library(recipes.ext)
+library(ggplot2)
+```
+
+```{r gen-data}
+df <- tibble::tibble(
+  x = seq(1,100,by=1),
+  y = rep(c(0,1),50),
+  z = seq(0.01,1,by=0.01)^2 + 3)
+
+rec_obj <- df |>
+  recipe(y ~ .) |>
+  step_top_code_perc(all_numeric_predictors(),prob = 0.9)
+
+rec_obj_prepped <- prep(rec_obj, training = df)
+```
+
+```{r plot}
+bind_cols(
+  df %>% rename_with(~ paste0(.x,"_original")),
+  bake(rec_obj_prepped, df) |>
+    rename_with(~ paste0(.x,"_transformed"))) |>
+  tibble::rownames_to_column() |>
+  tidyr::pivot_longer(-rowname) |>
+  tidyr::separate(name,into = c("variable","type"), sep="_") |>
+  tidyr::pivot_wider(
+    id_cols = c("rowname","variable"),
+    names_from = "type") |>
+  ggplot() + 
+  geom_point(aes(x=original,y=transformed)) +
+  facet_wrap(vars(variable), nrow=1, scales = "free")
+```

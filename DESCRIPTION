@@ -14,7 +14,14 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
+    dials,
     purrr,
     recipes,
     stats,
     tibble
+Suggests: 
+    rmarkdown,
+    knitr,
+    ggplot2,
+    tidyr
+VignetteBuilder: knitr
