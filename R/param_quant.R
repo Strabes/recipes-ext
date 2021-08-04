@@ -1,6 +1,8 @@
-perc <- function(range = seq(0,1,by=0.25), trans = NULL) {
+
+#' @export
+quant_param <- function(range = c(0,1), trans = NULL) {
   dials::new_quant_param(
-    type = "float",
+    type = "double",
     range = range,
     inclusive = c(TRUE, TRUE),
     trans = trans,

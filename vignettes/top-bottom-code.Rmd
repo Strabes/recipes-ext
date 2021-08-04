@@ -28,7 +28,7 @@ df <- tibble::tibble(
 
 rec_obj <- df |>
   recipe(y ~ .) |>
-  step_top_code_perc(all_numeric_predictors(),prob = 0.9)
+  step_top_code_quant(all_numeric_predictors(),prob = 0.9)
 
 rec_obj_prepped <- prep(rec_obj, training = df)
 ```
