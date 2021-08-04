@@ -24,6 +24,7 @@ Suggests:
     knitr,
     ggplot2,
     tidyr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    dplyr
 VignetteBuilder: knitr
 Config/testthat/edition: 3
